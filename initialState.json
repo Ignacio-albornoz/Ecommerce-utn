@@ -1,0 +1,9 @@
+{
+    "totalPrice": 0,
+    "cartList": [],
+    "user": {
+        "active": false,
+        "email": "invitado"
+    }
+}
+  
