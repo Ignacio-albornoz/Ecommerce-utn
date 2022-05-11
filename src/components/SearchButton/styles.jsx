@@ -15,6 +15,17 @@ export const Button = styled.button`
       z-index: 0;
       
     `}
+
+  @media (max-width: 425px) {
+    opacity: 0;
+    z-index: 0;
+    display: none;
+    ${(props) => props.menu && css`
+      opacity: 1;
+      display: flex;
+      z-index: 3;  
+    `}
+  }
   
 
   & svg {

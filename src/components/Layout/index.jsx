@@ -16,7 +16,7 @@ const LayoutContainer = (props) => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openSearchBar, setOpenSearchBar] = useState(false);
-  const { user, setSearch } = props;
+  const { user, setSearch, active } = props;
 
   useEffect(() => {
     console.log('USER ACTIVE');
@@ -28,10 +28,10 @@ const LayoutContainer = (props) => {
         <Burger open={open} setOpen={setOpen} />
         <Tittle to='/' open={open}>Modulo Final</Tittle>
         <WrapButtons>
-          <ChangeTheme menuActive={open} open={props.active} setOpen={props.setActive} />
+          <ChangeTheme menuActive={open} open={active} setOpen={props.setActive} />
           <LoginButton menuActive={open} open={openModal} setOpen={setOpenModal} />
           <CartButton menuActive={open} />
-          <SearchButton menuActive={open} open={openSearchBar} setOpen={setOpenSearchBar} setSearch={setSearch} />
+          <SearchButton menuActive={open} open={openSearchBar} setOpen={setOpenSearchBar} setSearch={setSearch} openActive={active} />
         </WrapButtons>
       </LayoutWrap>
     </React.StrictMode>

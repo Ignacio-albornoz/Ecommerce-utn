@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -14,7 +14,7 @@ import GlobalStyle from './GlobalStyled';
 
 const App = () => {
   const [active, setActive] = useState(false);
-  const [search, setSearch] = useState('moto');
+  const [search, setSearch] = useState('motos');
   const [items, setItems] = useState(false);
   const API = `https://api.mercadolibre.com/sites/MLA/search?q=${search}&limit=10`;
 

@@ -4,6 +4,7 @@ export const WrapBarSearch = styled.div`
   display: flex;
   width: 50%;
   min-width: 280px;
+  max-width: 860px;
   height: 2.4rem;
   align-items: center;
   text-align: center;
@@ -20,9 +21,9 @@ export const WrapBarSearch = styled.div`
   top: 5rem;
   border-radius: 2px;
   padding: 0;
-  transition: clip-path 0.45s ease-in-out;
+  transition: clip-path 0.35s ease-in-out;
   clip-path: ${({ open }) => (open ? 'circle(150% at 100% 0%)' : 'circle(0% at 100% 0%)')};
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 5px rgb(0 0 0 / 80%);
 `;
 
 export const Form = styled.input`

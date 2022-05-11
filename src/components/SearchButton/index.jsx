@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Modal } from 'react-responsive-modal';
-import { IoIosSearch, IoSearchCircle } from 'react-icons/io';
+import { IoIosSearch } from 'react-icons/io';
 import { SearchBar } from '../SearchBar';
 
 import { Button } from './styles';

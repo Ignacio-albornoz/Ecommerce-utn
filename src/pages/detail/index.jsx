@@ -5,7 +5,6 @@ import ReactLoading from 'react-loading';
 import { db } from '../../firebase/firebaseConfig';
 import { DetailInfo } from '../../components/DetailInfo/index';
 import { CarouselItem } from '../../components/CarouselItem';
-import { getItemCart } from '../../api';
 import { DetailWrap, TitleItem } from './styles';
 
 export const DetailContianer = ({ items, detailId }) => {

@@ -8,7 +8,6 @@ export const SearchBar = ({ open, setOpenSearch, setSearch }) => {
   const search = useInputValue('');
 
   const handleBlur = (e) => {
-    console.log('ssss');
     //setOpenSearch(false);
   };
 
@@ -35,7 +34,7 @@ export const SearchBar = ({ open, setOpenSearch, setSearch }) => {
   console.log(search.value);
   return (
     <WrapBarSearch onBlur={handleBlur} open={open} onKeyPress={handleChangeKeyPressEnter}>
-      <Form ref={element} placeholder='Buscar...' {...search} />
+      <Form ref={element} placeholder='Buscar...' {...search} autoFocus />
       <ButtonSearcher onClick={HandleChangeClick}>
         <IoIosSearch size='0.8rem' />
       </ButtonSearcher>

@@ -10,7 +10,7 @@ export const CartButton = ({ menuActive }) => {
   const Icon = openModal ? IoCartSharp : IoCartOutline;
   return (
     <>
-      <Button menu={menuActive} onClick={() => setOpenModal(!openModal)}>
+      <Button menu={menuActive} onClick={() => setOpenModal(!openModal)} disabled={menuActive}>
         <Modal open={openModal} onClose={() => setOpenModal(!openModal)}>
           <ListOfItemsCart />
         </Modal>
