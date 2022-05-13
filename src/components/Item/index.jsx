@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Anchor, Image, Title, Price } from './styles';
+import { Anchor, WrapImage, Image, Title, Price } from './styles';
 import { useNearScreen } from '../hooks/useNearScreen';
 
 export const Item = ({
@@ -23,20 +23,26 @@ export const Item = ({
   );
   return (
     <Anchor rel='preload' to={`/detail/${id}`} ref={element}>
-      {showItem && (
-        <>
-          {
-            itemImage ?
-              <Image src={itemImage[0].url} alt='mainImg' /> :
-              <Image src={thumbnail} alt='mainImg' />
-          }
-          <Title>{title}</Title>
-          <Price>
-            $
-            {price}
-          </Price>
-        </>
-      )}
+      <WrapImage>
+        {showItem && (
+          <>
+            <WrapImage>
+              {
+                itemImage ?
+                  <Image src={itemImage[0].url} alt='mainImg' /> :
+                  <Image src={thumbnail} alt='mainImg' />
+              }
+            </WrapImage>
+            <Title>{title}</Title>
+            <Price>
+              $
+              {price}
+            </Price>
+          </>
+        )}
+
+      </WrapImage>
+
     </Anchor>
   );
 };

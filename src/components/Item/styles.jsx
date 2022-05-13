@@ -36,6 +36,13 @@ export const Anchor = styled(Link)`
   }
 `;
 
+export const WrapImage = styled.div`
+  min-height: 260px;
+  display: flex ;
+  flex-direction: column ;
+  justify-content: center ;
+`;
+
 export const Image = styled.img`
   ${fadeIn({ time: '0.7s' })}
   border-radius: 2%;
