@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -13,7 +13,7 @@ import { Layout } from './components/Layout';
 import GlobalStyle from './GlobalStyled';
 
 const App = () => {
-  const [active, setActive] = useState(false);
+  const [activeDarkmode, setActiveDarkmode] = useState(false);
   const [search, setSearch] = useState('motos');
   const [items, setItems] = useState(false);
   const API = `https://api.mercadolibre.com/sites/MLA/search?q=${search}&limit=10`;
@@ -32,7 +32,7 @@ const App = () => {
           <Switch>
             {
               items ? (
-                <Layout setActive={setActive} active={active} setSearch={setSearch}>
+                <Layout setActive={setActiveDarkmode} active={activeDarkmode} setSearch={setSearch}>
                   <Route exact path='/' component={Home} />
                   <Route exact path='/detail/:detailId' component={Detail} />
                   <Route exact path='/register' component={FormRegister} />
@@ -40,13 +40,12 @@ const App = () => {
                   <Redirect from='/detail/' to='/' />
                 </Layout>
               ) :
-                <ReactLoading type='cubes' />
             }
           </Switch>
         </Provider>
       </BrowserRouter>
       {
-        active ? <GlobalStyle themes={ThemeDark} /> : <GlobalStyle themes={ThemeNormal} />
+        activeDarkmode ? <GlobalStyle themes={ThemeDark} /> : <GlobalStyle themes={ThemeNormal} />
       }
     </>
   );

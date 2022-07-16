@@ -44,6 +44,7 @@ export const WrapImage = styled.div`
 `;
 
 export const Image = styled.img`
+  max-height: 260px;
   ${fadeIn({ time: '0.7s' })}
   border-radius: 2%;
   height: auto;

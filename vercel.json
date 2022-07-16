@@ -1,6 +1,6 @@
 {
 	"version": 2,
-	"alias": ["ignacioAlbornoz-ecommerce"],
+	"alias": ["ignacioAlbornoz-ecommerce2"],
 	"builds": [
 	  { "use": "@vercel/static-build", "src": "package.json"}
 	],

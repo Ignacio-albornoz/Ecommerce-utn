@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production",
+    "buildw": "webpack --mode production",
     "dev": "webpack-dev-server --open --mode development",
     "format": "prettier --write {*.js,src/**/*.{js,jsx}}",
     "lint": "eslint src/ --fix"
@@ -17,6 +17,7 @@
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/polyfill": "^7.12.1",
     "@babel/runtime": "^7.17.9",
+    "@reduxjs/toolkit": "^1.8.1",
     "css-loader": "^6.7.1",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "^18.2.1",

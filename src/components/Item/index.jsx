@@ -9,6 +9,7 @@ export const Item = ({
   thumbnail,
   id,
 }) => {
+
   const [itemImage, setItemImage] = useState(false);
   const API = `https://api.mercadolibre.com/pictures/?ids=${thumbnail_id}`;
   const SIZE_IMAGE = '200x200';
@@ -16,6 +17,7 @@ export const Item = ({
 
   useEffect(
     () => {
+
       fetch(API).then((res) => res.json()).then((data) => setItemImage(data[0].variations.filter((image) => image.size === SIZE_IMAGE)));
       return itemImage;
 

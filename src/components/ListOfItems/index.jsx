@@ -25,6 +25,7 @@ const ListOfItemsContianer = ({
     [showFixed],
   );
 
+
   return (
     <Container>
       <Title>{title.charAt(0).toUpperCase() + title.slice(1)}</Title>
