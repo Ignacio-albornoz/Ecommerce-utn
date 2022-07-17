@@ -7,21 +7,27 @@ export const reducer = (state, action) => {
     }
   };
   switch (action.type) {
+
+    //Users
+    case 'SET_ACTIVEUSER':
+      return {
+        ...state,
+        user: [action.payload],
+      };
+
+    //Cart
     case 'ADD_CART':
       return {
         ...state,
         cartList: [...state.cartList, action.payload],
-      };
-    case 'SET_ACTIVEUSER':
-      return {
-        ...state,
-        user: [...state, action.payload],
       };
     case 'DELETE_CART':
       return {
         ...state,
         cartList: state.cartList.filter((items) => items.itemId !== action.payload),
       };
+
+    //Price
     case 'SET_TOTAL_PRICE':
       return {
         ...state,
@@ -37,6 +43,14 @@ export const reducer = (state, action) => {
         ...state,
         totalPrice: [0],
       };
+
+    //Search
+    case 'SET_SEARCH_VALUE':
+      return {
+        ...state,
+        searchValue: [action.payload],
+      };
+
     default:
       return state;
   }

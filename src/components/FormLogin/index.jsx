@@ -1,30 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { connect } from 'react-redux';
 import useInputValue from '../Hooks/useInputValue';
-import { setActiveUser } from '../../redux/action';
 import { Button, Input, Form, Title, RegisterLink, LinkWrap } from './styled';
 
-export const FormLoginContainer = (props) => {
+export const FormLogin = ({ setOpen, userS, userData }) => {
   const email = useInputValue('');
   const password = useInputValue('');
   const auth = getAuth();
-  const [asd, setAsd] = useState();
-  const { setOpen } = props;
-  const { userS } = props;
-
-  const handleActiveUser = (d) => {
-    props.setActiveUser(d);
-  };
-
-  useEffect(() => {
-
-    auth.onAuthStateChanged((data) => {
-      data ? setAsd({ active: true, email: data.email }) : setAsd({ active: false, email: 'invitado' });
-      asd ? handleActiveUser(asd) : null;
-    });
-
-  }, []);
+  const [loading, setLoading] = useState(false);
+  const [userEmail, SetUserEmail] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,22 +17,23 @@ export const FormLoginContainer = (props) => {
       .then((userCredential) => {
         // Signed in
         const { data } = userCredential;
-        const datita = ({ active: true, email: data.email });
+        /* const datita = ({ active: true, email: data.email });
         datita ? handleActiveUser(datita) : null;
         //handleActiveUser({ name: 'name', email: user.email, active: user.auth._isInitialized });
-        return user.email;
+        console.log(datita);
+        console.log(user);
+        return user.email; */
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-    setOpen(false);
   };
 
   const handleLogOut = () => {
     signOut(auth).then(() => {
-      setAsd({ active: false, email: 'invitado' });
-      handleActiveUser(asd);
+      setLoading({ active: false, email: 'invitado' });
+      handleActiveUser(loading);
     }).catch((error) => {
       console.error(error);
     });
@@ -57,9 +42,10 @@ export const FormLoginContainer = (props) => {
   return (
     <div>
       {
-        userS.active ? (
+        userData.auth._isInitialized ? (
           <Form>
             <h1>Estas logueado !</h1>
+            <p>{userData.email}</p>
             <Button type='button' onClick={() => handleLogOut()}>Cerrar Sesion</Button>
           </Form>
         ) :
@@ -80,13 +66,3 @@ export const FormLoginContainer = (props) => {
     </div>
   );
 };
-const mapDispatchToProps = {
-  setActiveUser,
-};
-
-const mapStateToProps = (state) => {
-  return {
-    userS: state.user,
-  };
-};
-export const FormLogin = connect(mapStateToProps, mapDispatchToProps)(FormLoginContainer);

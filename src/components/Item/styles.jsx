@@ -49,7 +49,7 @@ export const Image = styled.img`
   border-radius: 2%;
   height: auto;
   overflow: hidden;
-  object-fit: fill;
+  object-fit: contain;
   height: auto;
   @media (max-width: 400px) and (orientation: landscape){
     max-height: 55vh;

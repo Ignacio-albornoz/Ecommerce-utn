@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const WrapBarSearch = styled.div`
+export const Form = styled.div`
   display: flex;
   width: 50%;
   min-width: 280px;
@@ -26,7 +26,7 @@ export const WrapBarSearch = styled.div`
   box-shadow: 0 3px 5px rgb(0 0 0 / 80%);
 `;
 
-export const Form = styled.input`
+export const Input = styled.input`
   width: 94%;
   font-size: 1.4rem;
   font-weight: 300;

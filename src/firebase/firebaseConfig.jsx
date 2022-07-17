@@ -17,12 +17,12 @@ export const createUser = (auth, email, password) => {
 };
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBjNa0NX8szk73ydG8FAirodAfENeTGnms',
-  authDomain: 'modulo3-39c75.firebaseapp.com',
-  projectId: 'modulo3-39c75',
-  storageBucket: 'modulo3-39c75.appspot.com',
-  messagingSenderId: '1012309526832',
-  appId: '1:1012309526832:web:9de73acd997b8d61d320f5',
+  apiKey: "AIzaSyC34iy-m4CB0lBxBW0vn3qJgpskW_pmGf0",
+  authDomain: "ecommerce-64d6e.firebaseapp.com",
+  projectId: "ecommerce-64d6e",
+  storageBucket: "ecommerce-64d6e.appspot.com",
+  messagingSenderId: "423445091046",
+  appId: "1:423445091046:web:9428d628b8f8bf81512127"
 };
 
 // Initialize Firebase

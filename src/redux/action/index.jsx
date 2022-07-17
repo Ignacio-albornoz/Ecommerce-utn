@@ -27,3 +27,8 @@ export const restartTotal = (payload) => ({
   type: 'RESTART_TOTAL',
   payload,
 });
+
+export const setSearchValue = (payload) => ({
+  type: 'SET_SEARCH_VALUE',
+  payload,
+});

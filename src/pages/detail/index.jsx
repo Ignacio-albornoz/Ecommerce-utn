@@ -7,7 +7,7 @@ import { DetailInfo } from '../../components/DetailInfo/index';
 import { CarouselItem } from '../../components/CarouselItem';
 import { DetailWrap, TitleItem } from './styles';
 
-export const DetailContianer = ({ items, detailId }) => {
+const DetailContianer = ({ items, detailId }) => {
   const [item, setItem] = useState(false);
   const [itemCart, setItemCart] = useState([]);
 
@@ -50,4 +50,6 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export const Detail = connect(mapStateToProps, null)(DetailContianer);
+const Detail = connect(mapStateToProps, null)(DetailContianer);
+
+export default Detail;

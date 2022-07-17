@@ -1,17 +1,28 @@
 import React, { useRef, useEffect } from 'react';
 import { IoIosSearch } from 'react-icons/io';
-import { WrapBarSearch, Form, ButtonSearcher } from './styles';
+import { connect } from 'react-redux';
+import { Input, Form, ButtonSearcher } from './styles';
 import useInputValue from '../Hooks/useInputValue';
 
-export const SearchBar = ({ open, setOpenSearch, setSearch }) => {
+import { setSearchValue } from '../../redux/action';
+
+export const SearchBarContainer = ({ open, setOpenSearch, setSearch, setSearchValue }) => {
   const element = useRef(null);
   const search = useInputValue('');
+
+  useEffect(() => {
+    setSearchValue(search.value.toLowerCase());
+  }, [search.value]);
 
   const handleBlur = (e) => {
     //setOpenSearch(false);
   };
 
-  const handleChangeKeyPressEnter = (e) => {
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      setSearch('');
+      setOpenSearch(false);
+    }
     if (e.key === 'Enter') {
       setSearch(search.value);
       setOpenSearch(false);
@@ -31,13 +42,20 @@ export const SearchBar = ({ open, setOpenSearch, setSearch }) => {
     },
     [open],
   );
-  console.log(search.value);
+
   return (
-    <WrapBarSearch onBlur={handleBlur} open={open} onKeyPress={handleChangeKeyPressEnter}>
-      <Form ref={element} placeholder='Buscar...' {...search} autoFocus />
+    <Form onBlur={handleBlur} open={open} onKeyDown={handleKeyDown}>
+      <Input ref={element} placeholder='Buscar...' {...search} autoFocus />
       <ButtonSearcher onClick={HandleChangeClick}>
         <IoIosSearch size='0.8rem' />
       </ButtonSearcher>
-    </WrapBarSearch>
+    </Form>
   );
 };
+
+const mapDispatchToProps = {
+  setSearchValue,
+};
+
+export const SearchBar = connect(null, mapDispatchToProps)(SearchBarContainer);
+

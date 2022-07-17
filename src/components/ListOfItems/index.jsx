@@ -1,43 +1,43 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { Item } from '../Item/index';
+
 import { Container, List, Li, Title } from './styles';
 
 const ListOfItemsContianer = ({
   itemsQuery,
-  title = 'Mas Vendidos',
+  title = '',
+  search = 'zanella',
+  searchValue,
 }) => {
 
-  const [showFixed, setShowFixed] = useState(false);
-  const element = useRef(null);
+  const [filterData, setFilterData] = useState();
 
   useEffect(
     () => {
-      const onScroll = (e) => {
-        const newShowFixed = element.onmouseenter < 20;
-        showFixed !== newShowFixed && setShowFixed(newShowFixed);
-      };
-      //document.addEventListener('scroll', onScroll)
-      document.addEventListener('onmouseenter', onScroll);
-
-      return () => document.removeEventListener('onmouseenter', onScroll);
-    },
-    [showFixed],
+      searchValue ? setFilterData(itemsQuery.filter((item) => item.title.toLowerCase().includes(searchValue))) : console.log(`SEARCH VALUE: ${searchValue}`);
+    }, [searchValue],
   );
-
-
   return (
     <Container>
       <Title>{title.charAt(0).toUpperCase() + title.slice(1)}</Title>
       <List>
         {
-          itemsQuery.map((item) => (
-            (
-              <Li key={item.id}>
-                <Item {...item} />
-              </Li>
-            )
-          ))
+          filterData ?
+            filterData.map((item) => (
+              (
+                <Li key={item.id}>
+                  <Item {...item} />
+                </Li>
+              )
+            )) :
+            itemsQuery.map((item) => (
+              (
+                <Li key={item.id}>
+                  <Item {...item} />
+                </Li>
+              )
+            ))
         }
       </List>
     </Container>
@@ -48,6 +48,7 @@ const mapStateToProps = (state) => {
   return {
     itemsQuery: state.items,
     user: state.user,
+    searchValue: state.searchValue,
   };
 };
 

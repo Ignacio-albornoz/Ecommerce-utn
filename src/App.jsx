@@ -16,7 +16,7 @@ const App = () => {
   const [activeDarkmode, setActiveDarkmode] = useState(false);
   const [search, setSearch] = useState('motos');
   const [items, setItems] = useState(false);
-  const API = `https://api.mercadolibre.com/sites/MLA/search?q=${search}&limit=10`;
+  const API = `https://api.mercadolibre.com/sites/MLA/search?q=${search}&limit=24`;
 
   useEffect(() => {
     fetch(API).then((res) => res.json()).then((data) => setItems(data));
@@ -24,9 +24,12 @@ const App = () => {
   }, [search]);
   initialState.items = items.results;
   const store = createStore(reducer, initialState);
+
+  const Detail = React.lazy(() => import('./pages/detail'));
+
   return (
 
-    <>
+    <React.Suspense fallback={<div />}>
       <BrowserRouter>
         <Provider store={store}>
           <Switch>
@@ -39,7 +42,7 @@ const App = () => {
                   <Route exact path='/detail/undefined' component={Home} />
                   <Redirect from='/detail/' to='/' />
                 </Layout>
-              ) :
+              ) : console.log('LOADING!')
             }
           </Switch>
         </Provider>
@@ -47,7 +50,7 @@ const App = () => {
       {
         activeDarkmode ? <GlobalStyle themes={ThemeDark} /> : <GlobalStyle themes={ThemeNormal} />
       }
-    </>
+    </React.Suspense>
   );
 };
 
