@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { IoIosSearch } from 'react-icons/io';
 import { connect } from 'react-redux';
 import { Input, Form, ButtonSearcher } from './styles';
-import useInputValue from '../Hooks/useInputValue';
+import useInputValue from '../hooks/useInputValue';
 
 import { setSearchValue } from '../../redux/action';
 

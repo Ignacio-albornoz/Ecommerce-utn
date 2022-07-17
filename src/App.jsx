@@ -14,7 +14,7 @@ import GlobalStyle from './GlobalStyled';
 
 const App = () => {
   const [activeDarkmode, setActiveDarkmode] = useState(false);
-  const [search, setSearch] = useState('motos');
+  const [search, setSearch] = useState('samsung');
   const [items, setItems] = useState(false);
   const API = `https://api.mercadolibre.com/sites/MLA/search?q=${search}&limit=24`;
 

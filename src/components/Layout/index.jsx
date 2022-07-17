@@ -9,6 +9,7 @@ import { CartButton } from '../CartButton';
 import { SearchButton } from '../SearchButton';
 import { ChangeTheme } from '../ChangeTheme/index';
 import { FormLogin } from '../FormLogin';
+import { setEmailUser } from '../../redux/action';
 import { SearchBar } from '../SearchBar';
 
 import 'react-responsive-modal/styles.css';
@@ -18,25 +19,26 @@ const LayoutContainer = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [loginData, setLoginData] = useState();
-  const { user, setSearch, active, setActive } = props;
+  const [logout, setLogout] = useState();
+  const { user, setSearch, active, setActive, setEmailUser } = props;
 
   const auth = getAuth();
 
   useEffect(() => {
 
     auth.onAuthStateChanged((data) => {
-      data ? setLoginData(data) : console.log('Loading data');;
-      console.log(data);
-      loginData ? console.log(loginData.auth_isInitialized) : console.log(data);
+      data ? setLoginData(data) : setLoginData();
+      data ? setEmailUser(data.email) : setEmailUser('invitado');
+      console.log(user);
     });
 
-  }, []);
+  }, [logout]);
 
   const renderLayout = () => (
     <React.StrictMode>
       <LayoutWrap id='Layout' open={open}>
         <Burger open={open} setOpen={setOpen} />
-        <Tittle to='/' open={open}>E-commerce</Tittle>
+        <Tittle to='/' open={open}>DeRemate</Tittle>
         <WrapButtons>
           <ChangeTheme menuActive={open} open={active} setOpen={setActive} />
           <LoginButton menuActive={open} open={openModal} setOpen={setOpenModal} {...loginData} />
@@ -51,7 +53,7 @@ const LayoutContainer = (props) => {
     <>
       {renderLayout()}
       <Modal open={openModal} onClose={() => setOpenModal(false)}>
-        {{/* <FormLogin setOpen={setOpenModal} userData={loginData}/> */}}
+        <FormLogin setOpen={setOpenModal} auth={auth} userData={loginData} setLogout={setLogout} />
       </Modal>
 
       {
@@ -61,10 +63,15 @@ const LayoutContainer = (props) => {
   );
 };
 
+const mapDispatchToProps = {
+  setEmailUser,
+};
+
 const mapStateToProps = (state) => {
   return {
     cartList: state.cartList,
+    user: state.user,
   };
 };
 
-export const Layout = connect(mapStateToProps, null)(LayoutContainer);
+export const Layout = connect(mapStateToProps, mapDispatchToProps)(LayoutContainer);

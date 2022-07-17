@@ -33,20 +33,18 @@ export const Image = styled.img`
 `;
 
 export const Button = styled.button`
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    height: 2.8rem;
-    font-size: 1rem;
-    font-weight: 300;
-    letter-spacing: 2px;
-    color: rgb(255, 255, 255);
-    background: #1b4b7d;;
-    width: 80%;
-    margin: 0 auto;
-
-    :hover{
-        background: #1b4b7d;;
-    }
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: #fff;
+  background: #000;
+  border-radius: 8px;
+  width: 45%;
+  padding: 1.5%;
+  align-self: center;
+  box-shadow: 0 0px 1px rgb(0, 0, 0.15);
+  :hover {
+    box-shadow: 0 0px 5px rgb(0, 0, 0.45);
+  }
 `;
 
 export const Input = styled.input`

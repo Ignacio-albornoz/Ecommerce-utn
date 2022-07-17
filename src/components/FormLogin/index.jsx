@@ -1,28 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import useInputValue from '../Hooks/useInputValue';
-import { Button, Input, Form, Title, RegisterLink, LinkWrap } from './styled';
+import React, { useState } from 'react';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import useInputValue from '../hooks/useInputValue';
+import { Button, Input, Form, Title, RegisterLink, LinkWrap, H2, P } from './styled';
 
-export const FormLogin = ({ setOpen, userS, userData }) => {
+export const FormLogin = ({ setOpen, auth, userData, setLogout }) => {
   const email = useInputValue('');
   const password = useInputValue('');
-  const auth = getAuth();
   const [loading, setLoading] = useState(false);
-  const [userEmail, SetUserEmail] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     signInWithEmailAndPassword(auth, email.value, password.value)
       .then((userCredential) => {
-        // Signed in
-        const { data } = userCredential;
-        /* const datita = ({ active: true, email: data.email });
-        datita ? handleActiveUser(datita) : null;
-        //handleActiveUser({ name: 'name', email: user.email, active: user.auth._isInitialized });
-        console.log(datita);
-        console.log(user);
-        return user.email; */
+        setLoading(true);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -32,8 +23,7 @@ export const FormLogin = ({ setOpen, userS, userData }) => {
 
   const handleLogOut = () => {
     signOut(auth).then(() => {
-      setLoading({ active: false, email: 'invitado' });
-      handleActiveUser(loading);
+      setLogout(true);
     }).catch((error) => {
       console.error(error);
     });
@@ -42,10 +32,10 @@ export const FormLogin = ({ setOpen, userS, userData }) => {
   return (
     <div>
       {
-        userData.auth._isInitialized ? (
+        userData ? (
           <Form>
-            <h1>Estas logueado !</h1>
-            <p>{userData.email}</p>
+            <H2>Estas logueado !</H2>
+            <P>{userData.email}</P>
             <Button type='button' onClick={() => handleLogOut()}>Cerrar Sesion</Button>
           </Form>
         ) :

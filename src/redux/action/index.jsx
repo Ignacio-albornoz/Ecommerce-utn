@@ -32,3 +32,8 @@ export const setSearchValue = (payload) => ({
   type: 'SET_SEARCH_VALUE',
   payload,
 });
+
+export const setEmailUser = (payload) => ({
+  type: 'SET_EMAIL',
+  payload,
+});

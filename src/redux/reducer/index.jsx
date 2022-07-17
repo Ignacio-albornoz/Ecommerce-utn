@@ -51,6 +51,12 @@ export const reducer = (state, action) => {
         searchValue: [action.payload],
       };
 
+    case 'SET_EMAIL':
+      return {
+        ...state,
+        user: { email: action.payload },
+      };
+
     default:
       return state;
   }

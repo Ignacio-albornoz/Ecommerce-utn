@@ -20,6 +20,22 @@ export const Title = styled.h3`
     margin-bottom: 2%;
 `;
 
+export const H2 = styled.h2`
+    font-size: 2.0rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin: 0px;
+    margin-bottom: 2%;
+`;
+
+export const P = styled.p`
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    margin: 0px;
+    margin-bottom: 2.5%;
+`;
+
 export const Image = styled.img`
     border: 1px solid #d9d9d9;
     background: #d9d9d9;
@@ -32,21 +48,17 @@ export const Image = styled.img`
 `;
 
 export const Button = styled.button`
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    height: 2.2rem;
-    font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: 2px;
-    color: white;
-    background: #205894;
-    text-transform: uppercase;
-    text
-    :hover{
-        background: #1b4b7d;
-    }
-    width: 80%;
-    margin: 3% auto;
+    font-size: 1.6rem;
+  font-weight: 300;
+  color: #fff;
+  background: #000;
+  border-radius: 8px;
+  width: 45%;
+  padding: 1.5%;
+  box-shadow: 0 0px 1px rgb(0, 0, 0.15);
+  :hover {
+    box-shadow: 0 0px 5px rgb(0, 0, 0.45);
+  }
 `;
 
 export const Input = styled.input`

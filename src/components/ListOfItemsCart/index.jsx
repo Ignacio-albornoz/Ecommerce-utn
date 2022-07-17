@@ -13,17 +13,18 @@ const ListOfItemsCartContainer = (props) => {
   const [invitedItemCart, setInvitedItemCart] = useState(cartList);
   const [buy, setBuy] = useState(false);
   useEffect(() => {
-
+    console.log(user);
     const getItemCart = async () => {
+      console.log('GET ITEMS CART');
       const itemCartCol = collection(db, 'itemCart');
       const itemSnapshot = await getDocs(itemCartCol);
       const getItem = itemSnapshot.docs.map((doc) => ({ data: doc.data().data, id: doc.id }));
-      const filterItem = getItem.filter((itemFilt) => itemFilt.data.user === 'n@gmail.com');
+      const filterItem = getItem.filter((itemFilt) => itemFilt.data.user === user.email);
       setUserItemCart(getItem);
       return getItem;
     };
 
-    user ? getItemCart() : setInvitedItemCart(cartList);
+    user.email === 'invitado' ? setInvitedItemCart(cartList) : getItemCart();
 
   }, []);
 
@@ -84,9 +85,6 @@ const ListOfItemsCartContainer = (props) => {
   return (
     <Container>
       <Title>Carro</Title>
-      {
-
-      }
       {renderCartInvitado()}
       {cartList.length > 0 ? renderWrapButton() : null}
     </Container>

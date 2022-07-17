@@ -24,6 +24,9 @@ const GlobalStyle = createGlobalStyle`
         @media (max-width: 420px) {
         font-size: 12px;
         }
+        @media (max-width: 340px) {
+        font-size: 10px;
+        }
 
     
     }

@@ -61,6 +61,8 @@ export const List = styled.ul`
 export const Li = styled.li`
   padding: 5px 1px;
   margin-bottom: 15px;
+  width: 92%;
+  max-width: 92%;
   margin: 0 7px;
   min-width: 170px;
   height: min-content;
