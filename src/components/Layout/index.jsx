@@ -9,7 +9,7 @@ import { CartButton } from '../CartButton';
 import { SearchButton } from '../SearchButton';
 import { ChangeTheme } from '../ChangeTheme/index';
 import { FormLogin } from '../FormLogin';
-import { setEmailUser } from '../../redux/action';
+import { setEmailUser, restartTotal } from '../../redux/action';
 import { SearchBar } from '../SearchBar';
 
 import 'react-responsive-modal/styles.css';
@@ -20,7 +20,7 @@ const LayoutContainer = (props) => {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [loginData, setLoginData] = useState();
   const [logout, setLogout] = useState();
-  const { user, setSearch, active, setActive, setEmailUser } = props;
+  const { user, setSearch, active, setActive, setEmailUser, restartTotal } = props;
 
   const auth = getAuth();
 
@@ -29,7 +29,7 @@ const LayoutContainer = (props) => {
     auth.onAuthStateChanged((data) => {
       data ? setLoginData(data) : setLoginData();
       data ? setEmailUser(data.email) : setEmailUser('invitado');
-      console.log(user);
+      restartTotal();
     });
 
   }, [logout]);
@@ -65,6 +65,7 @@ const LayoutContainer = (props) => {
 
 const mapDispatchToProps = {
   setEmailUser,
+  restartTotal,
 };
 
 const mapStateToProps = (state) => {

@@ -11,20 +11,18 @@ const ItemCartInvitedContainer = (props) => {
   const IconDelete = TiDelete;
 
   useEffect(() => {
-    fetch(API).then((res) => res.json()).then((data) => useItemCartData(data));
+    fetch(API).then((res) => res.json()).then((data) => {
+      useItemCartData(data);
+      data ? setTotal(data.price) : null;
+      data ? console.log(data.price) : null;
+    });
 
   }, []);
-  const handleSetTotal = (price) => {
-    setTotal(price);
-  };
 
   const handleDeleteItemCartRedux = (idItem) => {
     subTotal(itemCartData.price);
     deleteItemCartRedux(idItem);
   };
-
-  itemCartData.error ? useItemCartData(false) : null;
-  !itemCartData.error && itemCartData ? handleSetTotal(itemCartData.price) : null;
 
   const renderCartUser = () => (
     <Wrap>

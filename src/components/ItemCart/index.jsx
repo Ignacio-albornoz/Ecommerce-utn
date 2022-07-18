@@ -5,18 +5,21 @@ import { setTotal } from '../../redux/action';
 import { Wrap, Anchor, Image, Title, TitleWrap, Price, Button } from './styles';
 
 const ItemCartContainer = (props) => {
-  const { data, itemId } = props;
+
+  const { data, itemId, setTotal } = props;
   const API = `https://api.mercadolibre.com/items/${data.itemId}/`;
   const [itemCartData, useItemCartData] = useState(false);
   const IconDelete = TiDelete;
-  useEffect(() => {
-    fetch(API).then((res) => res.json()).then((data) => useItemCartData(data));
-  }, []);
-  const handleSetTotal = (price) => {
-    props.setTotal(price);
-  };
 
-  itemCartData ? handleSetTotal(itemCartData.price) : null;
+  useEffect(() => {
+    console.log(data);
+    fetch(API).then((res) => res.json()).then((data) => {
+      useItemCartData(data);
+      data ? setTotal(data.price) : null;
+      data ? console.log(data.price) : null;
+    });
+  }, [data]);
+
   return (
 
     <>

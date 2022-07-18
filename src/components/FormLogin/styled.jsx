@@ -73,7 +73,6 @@ export const Input = styled.input`
     ::placeholder {
     color: rgba(107, 107, 107, 0.534);
     }
-    }
     :focus{
         border: 1.1px solid rgba(80, 80, 80, 0.5);
         outline: none;

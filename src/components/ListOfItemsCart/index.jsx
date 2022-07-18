@@ -4,24 +4,27 @@ import { connect } from 'react-redux';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import { ItemCart } from '../ItemCart';
 import { ItemCartInvited } from '../ItemCartInvited';
+import { restartTotal } from '../../redux/action';
 import { db } from '../../firebase/firebaseConfig';
 import { Container, List, Li, Title, Button, WrapButton, TotalPrice, WrapFinishMessage, HomeAnchor } from './styles';
 
 const ListOfItemsCartContainer = (props) => {
-  const { user, totalPrice, cartList } = props;
+  const { user, totalPrice, cartList, restartTotal } = props;
   const [userItemCart, setUserItemCart] = useState();
   const [invitedItemCart, setInvitedItemCart] = useState(cartList);
   const [buy, setBuy] = useState(false);
+
   useEffect(() => {
-    console.log(user);
+    console.log(cartList);
     const getItemCart = async () => {
       console.log('GET ITEMS CART');
       const itemCartCol = collection(db, 'itemCart');
       const itemSnapshot = await getDocs(itemCartCol);
       const getItem = itemSnapshot.docs.map((doc) => ({ data: doc.data().data, id: doc.id }));
-      const filterItem = getItem.filter((itemFilt) => itemFilt.data.user === user.email);
-      setUserItemCart(getItem);
-      return getItem;
+      const filterItem = getItem.filter((itemFilt) => itemFilt.data.user.email === user.email);
+      setUserItemCart(filterItem);
+      restartTotal();
+      return filterItem;
     };
 
     user.email === 'invitado' ? setInvitedItemCart(cartList) : getItemCart();
@@ -55,8 +58,8 @@ const ListOfItemsCartContainer = (props) => {
   const renderCartInvitado = () => (
     <List>
       {
-        cartList && cartList.length > 0 ?
-          cartList.map((item) => ((
+        invitedItemCart && invitedItemCart.length > 0 ?
+          invitedItemCart.map((item) => ((
             (
               <Li key={item.itemId}>
                 <ItemCartInvited id={item.itemId} />
@@ -73,7 +76,7 @@ const ListOfItemsCartContainer = (props) => {
         userItemCart ?
           userItemCart.map((item) => ((
             (
-              <Li key={item.itemId}>
+              <Li key={item.data.itemId}>
                 <ItemCart {...item} />
               </Li>
             )))) : <h1>LOADING!!!</h1>
@@ -85,10 +88,16 @@ const ListOfItemsCartContainer = (props) => {
   return (
     <Container>
       <Title>Carro</Title>
-      {renderCartInvitado()}
+      {user.email === 'invitado' ? renderCartInvitado() : renderCartUser()}
       {cartList.length > 0 ? renderWrapButton() : null}
+      {userItemCart ? renderWrapButton() : null}
+
     </Container>
   );
+};
+
+const mapDispatchToProps = {
+  restartTotal,
 };
 
 const mapStateToProps = (state) => {
@@ -99,4 +108,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export const ListOfItemsCart = connect(mapStateToProps, null)(ListOfItemsCartContainer);
+export const ListOfItemsCart = connect(mapStateToProps, mapDispatchToProps)(ListOfItemsCartContainer);
