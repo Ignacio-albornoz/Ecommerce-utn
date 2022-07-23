@@ -12,6 +12,7 @@ const ListOfItemsCartContainer = (props) => {
   const { user, totalPrice, cartList, restartTotal } = props;
   const [userItemCart, setUserItemCart] = useState();
   const [invitedItemCart, setInvitedItemCart] = useState(cartList);
+  const [price, setPrice] = useState(0);
   const [buy, setBuy] = useState(false);
 
   useEffect(() => {
@@ -23,11 +24,17 @@ const ListOfItemsCartContainer = (props) => {
       const getItem = itemSnapshot.docs.map((doc) => ({ data: doc.data().data, id: doc.id }));
       const filterItem = getItem.filter((itemFilt) => itemFilt.data.user.email === user.email);
       setUserItemCart(filterItem);
+      const suma = filterItem.map((item) => item.data.price);
       restartTotal();
-      return filterItem;
+      console.log(suma);
+      console.log(filterItem);
+      console.log(price);
+      return { filterItem, suma };
     };
 
-    user.email === 'invitado' ? setInvitedItemCart(cartList) : getItemCart();
+    //HACER SUMA ACA
+
+    user.email === 'invitado' ? setInvitedItemCart(cartList) && cartList.map((item) => { item.price + total; }) : getItemCart();
 
   }, []);
 

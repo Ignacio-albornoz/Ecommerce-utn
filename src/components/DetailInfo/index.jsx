@@ -17,7 +17,7 @@ export const DetailInfoContainer = ({
   const API = `https://api.mercadolibre.com/items/${id}/description`;
   const [description, setDescription] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const data = { itemId: id, user };
+  const data = { itemId: id, user, price };
   const invitedData = { itemId: id };
   useEffect(() => {
     fetch(API).then((res) => res.json()).then((data) => setDescription(data.plain_text));
@@ -31,8 +31,10 @@ export const DetailInfoContainer = ({
   };*/
   const handleAddItemFireStore = () => {
     if (user === 'invitado' || user === undefined) {
+      console.log(invitedData);
       addItemCartRedux(invitedData);
     } else {
+      console.log(data);
       addItemCart(data);
       addItemCartRedux(data);
     }
@@ -51,7 +53,7 @@ export const DetailInfoContainer = ({
       <Info>
         {description}
       </Info>
-      <Modal open={openModal} onClose={() => setOpenModal(!openModal) || restartTotal()}>
+      <Modal open={openModal} onClose={() => setOpenModal(!openModal)}>
         <ListOfItemsCart />
       </Modal>
     </WrapDetailInfo>
