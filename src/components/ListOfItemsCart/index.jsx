@@ -33,7 +33,7 @@ const ListOfItemsCartContainer = (props) => {
     };
 
     //HACER SUMA ACA
-
+    restartTotal();
     user.email === 'invitado' ? setInvitedItemCart(cartList) && cartList.map((item) => { item.price + total; }) : getItemCart();
 
   }, []);

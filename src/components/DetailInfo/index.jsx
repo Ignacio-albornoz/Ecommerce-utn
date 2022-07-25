@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-responsive-modal';
 import { connect } from 'react-redux';
-import { addItemCartRedux, restartTotal } from '../../redux/action';
+import { addItemCartRedux, setTotal } from '../../redux/action';
 import { addItemCart, getItemCart } from '../../api';
 import { WrapDetailInfo, Wrap, Title, Price, Info, ButtonComprar } from './styles';
 import { ListOfItemsCart } from '../ListOfItemsCart';
@@ -12,13 +12,15 @@ export const DetailInfoContainer = ({
   id,
   user = 'invitado',
   addItemCartRedux,
-  restartTotal,
+  setTotal,
 }) => {
+
   const API = `https://api.mercadolibre.com/items/${id}/description`;
   const [description, setDescription] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const data = { itemId: id, user, price };
-  const invitedData = { itemId: id };
+  const invitedData = { itemId: id, price };
+
   useEffect(() => {
     fetch(API).then((res) => res.json()).then((data) => setDescription(data.plain_text));
   }, []);
@@ -62,7 +64,7 @@ export const DetailInfoContainer = ({
 
 const mapDispatchToProps = {
   addItemCartRedux,
-  restartTotal,
+  setTotal,
 };
 const mapStateToProps = (state) => {
   return {
