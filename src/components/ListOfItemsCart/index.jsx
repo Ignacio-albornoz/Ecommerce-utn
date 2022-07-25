@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { connect } from 'react-redux';
 import { BsCheckCircleFill } from 'react-icons/bs';
+import ReactLoading from 'react-loading';
 import { ItemCart } from '../ItemCart';
 import { ItemCartInvited } from '../ItemCartInvited';
 import { restartTotal } from '../../redux/action';
@@ -86,7 +87,7 @@ const ListOfItemsCartContainer = (props) => {
               <Li key={item.data.itemId}>
                 <ItemCart {...item} />
               </Li>
-            )))) : <h1>LOADING!!!</h1>
+            )))) : <ReactLoading type='cubes' color='#cacaca' />
       }
 
     </List>

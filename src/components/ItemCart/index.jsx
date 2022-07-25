@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { TiDelete } from 'react-icons/ti';
+import ReactLoading from 'react-loading';
 import { setTotal } from '../../redux/action';
 import { Wrap, Anchor, Image, Title, TitleWrap, Price, Button } from './styles';
 
@@ -42,7 +43,7 @@ const ItemCartContainer = (props) => {
                 </Button>
               </Anchor>
             </Wrap>
-          ) : <h1>False</h1>/*(
+          ) : <ReactLoading type='cubes' color='#cacaca' />/*(
           (
           <Wrap>
             <Anchor>

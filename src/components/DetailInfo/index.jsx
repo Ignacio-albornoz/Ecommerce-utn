@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-responsive-modal';
 import { connect } from 'react-redux';
-import { addItemCartRedux, setTotal } from '../../redux/action';
+import { addItemCartRedux } from '../../redux/action';
 import { addItemCart, getItemCart } from '../../api';
 import { WrapDetailInfo, Wrap, Title, Price, Info, ButtonComprar } from './styles';
 import { ListOfItemsCart } from '../ListOfItemsCart';
@@ -12,7 +12,6 @@ export const DetailInfoContainer = ({
   id,
   user = 'invitado',
   addItemCartRedux,
-  setTotal,
 }) => {
 
   const API = `https://api.mercadolibre.com/items/${id}/description`;
@@ -64,7 +63,6 @@ export const DetailInfoContainer = ({
 
 const mapDispatchToProps = {
   addItemCartRedux,
-  setTotal,
 };
 const mapStateToProps = (state) => {
   return {

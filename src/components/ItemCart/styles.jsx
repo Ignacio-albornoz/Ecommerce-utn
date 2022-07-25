@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 export const Wrap = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center ;
+  align-content: center ;
   background-color: #FFF;
   width: 100%;
 `;

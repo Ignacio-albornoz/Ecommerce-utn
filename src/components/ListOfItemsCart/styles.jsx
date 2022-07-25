@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   max-height: 85vh;
+  max-width: 84vw;
   align-items: center;
   text-align: center;
   padding-top: 10px;
@@ -11,13 +12,21 @@ export const Container = styled.div`
   overflow-x: hidden;
   overflow-y: hidden ;
   background: inherit;
-  min-width: 500px;
+  
   @media (max-width: 650px) {
-    min-width: 425px;
+    min-width: 84vw;
   }
   @media (max-width: 445px) {
-    min-width: 300px;
-}
+    min-width: 84vw;
+  }
+  @media (max-width: 370px) {
+    min-width: 84vw;
+    width: 90%;
+  }
+  @media (max-width: 320px) {
+    max-width: 84vw;
+    width: 90%;
+  }
 
 `;
 
@@ -42,24 +51,6 @@ export const List = styled.ul`
   justify-items: center;
   overflow-y: scroll;
   overflow-x: hidden;
-  /*@media (max-width: 900px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  @media (max-width: 670px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 450px) {
-    flex-flow: wrap;
-    justify-content: center;
-    margin-top: 10px;
-    overflow-y: hidden;
-    flex-direction: row;
-    padding: 0%;
-  }
-  @media (max-width: 400px) {
-    grid-template-columns: repeat(1, 1fr)
-  }
-  */
 `;
 
 export const Li = styled.li`
@@ -71,7 +62,6 @@ export const Li = styled.li`
   padding: 1%;
   @media (max-width: 400px) {
     grid-template-columns: min-content;
-    min-width: 300px;
   }
   @media (max-width: 400px) and (orientation: landscape){
     max-height: 95vh;
@@ -84,20 +74,11 @@ export const Li = styled.li`
   }
 `;
 export const WrapButton = styled.div`
-  position: absolute;
   display: flex;
   bottom: 0%;
-  width: 100%;
-  height: 5vh;
-  min-width: 420px;
+  padding: 0 2% ;
   justify-content: space-between;
   align-items: center;
-  @media (max-width: 650px) {
-    min-width: 70vw;
-  }
-  @media (max-width: 445px) {
-    min-width: 70vw;
-}
 `;
 
 export const Button = styled.button`
@@ -106,8 +87,9 @@ export const Button = styled.button`
   font-size: 1.1rem;
   font-weight: 300;
   letter-spacing: 1.2px;
-  color: rgb(255, 255, 255);
-  background: #1b4b7d;;
+  text-align: center;
+  color: #fff;
+  background: #000000;;
   padding: 3%;
   min-width: min-content;
   :hover{
@@ -119,6 +101,9 @@ export const TotalPrice = styled.p`
   font-size: 2.1rem;
   margin-bottom: -2px;
   font-weight: 600;
+  @media (max-width: 370px) {
+    font-size: 1.8rem;
+  }
 `;
 
 export const HomeAnchor = styled(Link)`
