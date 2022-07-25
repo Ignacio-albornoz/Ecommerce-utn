@@ -10,7 +10,6 @@ import { SearchButton } from '../SearchButton';
 import { ChangeTheme } from '../ChangeTheme/index';
 import { FormLogin } from '../FormLogin';
 import { setEmailUser, restartTotal } from '../../redux/action';
-import { SearchBar } from '../SearchBar';
 
 import 'react-responsive-modal/styles.css';
 
@@ -20,7 +19,7 @@ const LayoutContainer = (props) => {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [loginData, setLoginData] = useState();
   const [logout, setLogout] = useState();
-  const { user, setSearch, active, setActive, setEmailUser, restartTotal } = props;
+  const { setSearch, active, setActive, setEmailUser, restartTotal } = props;
 
   const auth = getAuth();
 

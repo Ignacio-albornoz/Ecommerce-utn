@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { TiDelete } from 'react-icons/ti';
-import ReactLoading from 'react-loading';
+import { DeleteItemCart } from '../../api';
 import { setTotal } from '../../redux/action';
 import { Wrap, Anchor, Image, Title, TitleWrap, Price, Button } from './styles';
 
@@ -21,6 +21,10 @@ const ItemCartContainer = (props) => {
     });
   }, [data]);
 
+  const handleOnDeleteItem = (data) => {
+    console.log(data);
+  };
+
   return (
 
     <>
@@ -38,12 +42,12 @@ const ItemCartContainer = (props) => {
                   $
                   {itemCartData.price}
                 </Price>
-                <Button type='buttom'>
+                <Button type='buttom' onClick={handleOnDeleteItem(data)}>
                   <IconDelete size='0.5rem' border-radius='50%' />
                 </Button>
               </Anchor>
             </Wrap>
-          ) : <ReactLoading type='cubes' color='#cacaca' />/*(
+          ) : null/*(
           (
           <Wrap>
             <Anchor>
