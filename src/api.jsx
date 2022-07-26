@@ -18,7 +18,7 @@ export const getItemCart = async () => {
 };
 
 export const getItemCartForEmail = async (email) => {
-  const q = query(collection(db, 'itemCart'), where('user.email', '==', email));
+  const q = query(collection(db, 'itemCart'), where('user', '==', email, 'n@gmail.com'));
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
@@ -30,6 +30,9 @@ export const getItemCartForEmail2 = async (email) => {
   const querySnapshot = await getDocs(collection(db, 'itemCart'));
 
   querySnapshot.forEach((doc) => {
-    console.log(doc.data());
+    const data = doc.data();
+    data.data.user.email === email ? console.log(data.data) : null;
+    return data.data.user.email === email ? data.data : null;
+
   });
 };
