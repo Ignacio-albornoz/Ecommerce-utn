@@ -12,7 +12,6 @@ const ListOfItemsCartContainer = (props) => {
   const [invitedItemCart, setInvitedItemCart] = useState(cartList);
 
   useEffect(() => {
-    console.log(cartList);
     const getItemCart = async () => {
       //Query Firebase
       const itemCartCol = collection(db, 'itemCart');
@@ -21,6 +20,7 @@ const ListOfItemsCartContainer = (props) => {
       //Filter user
       const filterItem = getItem.filter((itemFilt) => itemFilt.data.user.email === user.email);
       setUserItemCart(filterItem);
+
       //Suma
       const suma = filterItem.map((item) => item.data.price);
       //Retart total, para evitar errores
@@ -32,8 +32,7 @@ const ListOfItemsCartContainer = (props) => {
     //Define que lista mostrar, activa query
     user.email === 'invitado' ? setInvitedItemCart(cartList) && cartList.map((item) => { item.price + total; }) : getItemCart();
 
-  }, []);
-
+  }, [cartList]);
   return (
     <Container>
       <Title>Carro</Title>

@@ -15,7 +15,7 @@ const ListOfItemsContianer = ({
 
   useEffect(
     () => {
-      searchValue ? setFilterData(itemsQuery.filter((item) => item.title.toLowerCase().includes(searchValue))) : console.log(`SEARCH VALUE: ${searchValue}`);
+      searchValue ? setFilterData(itemsQuery.filter((item) => item.title.toLowerCase().includes(searchValue))) : null;
     }, [searchValue],
   );
   return (

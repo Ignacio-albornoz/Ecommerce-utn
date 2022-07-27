@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-responsive-modal';
 import { connect } from 'react-redux';
 import { addItemCartRedux } from '../../redux/action';
-import { addItemCart, getItemCart, getItemCartForEmail, getItemCartForEmail2 } from '../../api';
+import { addItemCart, getItemCart } from '../../api';
 import { WrapDetailInfo, Wrap, Title, Price, Info, ButtonComprar } from './styles';
 import { ListOfItemsCart } from '../ListOfItemsCart';
 
@@ -22,8 +22,6 @@ export const DetailInfoContainer = ({
 
   useEffect(() => {
     fetch(API).then((res) => res.json()).then((data) => setDescription(data.plain_text));
-    getItemCartForEmail2('n@gmail.com');
-    getItemCartForEmail('n@gmail.com');
   }, []);
 
   /*const setLocalStorage = () => {
@@ -33,12 +31,11 @@ export const DetailInfoContainer = ({
       console.error(e);
     }
   };*/
+
   const handleAddItemFireStore = () => {
     if (user === 'invitado' || user === undefined) {
-      console.log(invitedData);
       addItemCartRedux(invitedData);
     } else {
-      console.log(data);
       addItemCart(data);
       addItemCartRedux(data);
     }

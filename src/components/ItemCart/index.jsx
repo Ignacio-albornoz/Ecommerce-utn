@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { TiDelete } from 'react-icons/ti';
+import { collection, deleteDoc, where } from 'firebase/firestore';
+import { db } from '../../firebase/firebaseConfig';
 import { DeleteItemCart } from '../../api';
 import { setTotal } from '../../redux/action';
 import { Wrap, Anchor, Image, Title, TitleWrap, Price, Button } from './styles';
 
 const ItemCartContainer = (props) => {
 
-  const { data, itemId, setTotal } = props;
+  const { data, setTotal, id } = props;
   const API = `https://api.mercadolibre.com/items/${data.itemId}/`;
   const [itemCartData, useItemCartData] = useState(false);
   const IconDelete = TiDelete;
 
   useEffect(() => {
-    console.log(data);
     fetch(API).then((res) => res.json()).then((data) => {
       useItemCartData(data);
       data ? setTotal(data.price) : null;
-      data ? console.log(data.price) : null;
     });
   }, [data]);
 
-  const handleOnDeleteItem = (data) => {
-    console.log(data);
+  const handleOnDeleteItem = async (data) => {
+    data ? await DeleteItemCart(data) : null;
   };
 
   return (
@@ -42,7 +42,7 @@ const ItemCartContainer = (props) => {
                   $
                   {itemCartData.price}
                 </Price>
-                <Button type='buttom' onClick={handleOnDeleteItem(data)}>
+                <Button type='buttom' onClick={() => handleOnDeleteItem(id)}>
                   <IconDelete size='0.5rem' border-radius='50%' />
                 </Button>
               </Anchor>

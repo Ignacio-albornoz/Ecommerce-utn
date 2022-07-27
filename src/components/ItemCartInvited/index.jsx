@@ -14,7 +14,6 @@ const ItemCartInvitedContainer = (props) => {
     fetch(API).then((res) => res.json()).then((data) => {
       useItemCartData(data);
       data ? setTotal(data.price) : null;
-      data ? console.log(data.price) : null;
     });
 
   }, []);
