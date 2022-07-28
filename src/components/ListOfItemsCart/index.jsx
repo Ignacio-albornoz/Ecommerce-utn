@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { connect } from 'react-redux';
-import { renderCartUser, renderCartInvitado, renderWrapButton } from '../RendersListOfItemsCart';
-import { restartTotal } from '../../redux/action';
+import { DeleteItemCart } from '../../api';
+import { renderCartUser, renderCartInvitado, renderWrapButton, renderEmptyCart } from '../RendersListOfItemsCart';
+import { restartTotal, deleteAllItemCartRedux } from '../../redux/action';
 import { db } from '../../firebase/firebaseConfig';
 import { Container, Title } from './styles';
 
 const ListOfItemsCartContainer = (props) => {
   const { user, totalPrice, cartList, restartTotal } = props;
-  const [userItemCart, setUserItemCart] = useState();
+  const [userItemCart, setUserItemCart] = useState([]);
   const [invitedItemCart, setInvitedItemCart] = useState(cartList);
+  const [soldOut, setSoldOut] = useState(cartList);
 
   useEffect(() => {
     const getItemCart = async () => {
@@ -33,17 +35,27 @@ const ListOfItemsCartContainer = (props) => {
     user.email === 'invitado' ? setInvitedItemCart(cartList) && cartList.map((item) => { item.price + total; }) : getItemCart();
 
   }, [cartList]);
+
+  console.log(userItemCart);
+  console.log(invitedItemCart);
+
+  const handleOnSoldOut = async (data) => {
+    userItemCart.length > 0 ? userItemCart.map((items) => DeleteItemCart(items.id)) : console.msg('No hay items');
+    cartList.length > 0 ? deleteAllItemCartRedux() : console.msg('No hay items');
+  };
+
   return (
     <Container>
       <Title>Carro</Title>
       {user.email === 'invitado' ? renderCartInvitado(invitedItemCart) : renderCartUser(userItemCart)}
-      {(cartList.length > 0) || (userItemCart) ? renderWrapButton(totalPrice) : null}
+      {(cartList.length > 0) || (userItemCart.length > 0) ? renderWrapButton(totalPrice, handleOnSoldOut, setSoldOut) : renderEmptyCart()}
     </Container>
   );
 };
 
 const mapDispatchToProps = {
   restartTotal,
+  deleteAllItemCartRedux,
 };
 
 const mapStateToProps = (state) => {

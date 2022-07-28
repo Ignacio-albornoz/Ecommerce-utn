@@ -27,6 +27,12 @@ export const reducer = (state, action) => {
         cartList: state.cartList.filter((items) => items.itemId !== action.payload),
       };
 
+    case 'DELETE_ALL_CART':
+      return {
+        ...state,
+        cartList: [],
+      };
+
     //Price
     case 'SET_TOTAL_PRICE':
       return {

@@ -17,13 +17,13 @@ export const renderCompra = (itemCartData) => (
     ) : <h1>Loading</h1>
 );
 
-export const renderWrapButton = (totalPrice) => (
+export const renderWrapButton = (totalPrice, handleOnSoldOut, setSoldOut) => (
   <WrapButton>
     <TotalPrice>
       Total: $
       {totalPrice}
     </TotalPrice>
-    <Button onClick={() => setBuy(true)}>
+    <Button onClick={() => setSoldOut(true) || handleOnSoldOut()}>
       Finalizar Compra
     </Button>
   </WrapButton>
@@ -38,7 +38,7 @@ export const renderCartInvitado = (invitedItemCart) => (
             <Li key={item.itemId}>
               <ItemCartInvited id={item.itemId} />
             </Li>
-          )))) : <p>Tu carrito esta vacio</p>
+          )))) : null
     }
 
   </List>
@@ -56,5 +56,11 @@ export const renderCartUser = (userItemCart) => (
           )))) : <ReactLoading type='cubes' color='#cacaca' />
     }
 
+  </List>
+);
+
+export const renderEmptyCart = () => (
+  <List>
+    <p>Tu carrito esta vacio</p>
   </List>
 );

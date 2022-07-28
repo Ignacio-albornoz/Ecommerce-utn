@@ -8,6 +8,11 @@ export const deleteItemCartRedux = (payload) => ({
   payload,
 });
 
+export const deleteAllItemCartRedux = (payload) => ({
+  type: 'DELETE_ALL_CART',
+  payload,
+});
+
 export const setActiveUser = (payload) => ({
   type: 'SET_ACTIVEUSER',
   payload,
