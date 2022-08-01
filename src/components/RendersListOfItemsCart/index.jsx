@@ -5,25 +5,25 @@ import { ItemCart } from '../ItemCart';
 import { ItemCartInvited } from '../ItemCartInvited';
 import { List, Li, Title, Button, WrapButton, TotalPrice, WrapFinishMessage, HomeAnchor } from './styles';
 
-export const renderCompra = (itemCartData) => (
-  itemCartData ?
+export const renderSoldOut = (soldOut) => (
+  soldOut ?
     (
       <WrapFinishMessage>
         <h3>Felicitaciones!</h3>
-        <Title>{`compraste ${itemCartData.title}!`}</Title>
+        <Title>Compraste</Title>
         <BsCheckCircleFill />
         <HomeAnchor to='./'>Volver al Inicio</HomeAnchor>
       </WrapFinishMessage>
-    ) : <h1>Loading</h1>
+    ) : null
 );
 
-export const renderWrapButton = (totalPrice, handleOnSoldOut, setSoldOut) => (
+export const renderWrapButton = (totalPrice, handleOnSoldOut) => (
   <WrapButton>
     <TotalPrice>
       Total: $
       {totalPrice}
     </TotalPrice>
-    <Button onClick={() => setSoldOut(true) || handleOnSoldOut()}>
+    <Button onClick={() => handleOnSoldOut()}>
       Finalizar Compra
     </Button>
   </WrapButton>

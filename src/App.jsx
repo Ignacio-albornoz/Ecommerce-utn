@@ -30,12 +30,13 @@ const App = () => {
   return (
 
     <React.Suspense fallback={<div />}>
-      <BrowserRouter>
-        <Provider store={store}>
+      <Provider store={store}>
+        <BrowserRouter>
           <Switch>
             {
               items ? (
                 <Layout setActive={setActiveDarkmode} active={activeDarkmode} setSearch={setSearch}>
+                  <Route exact path='/(:filter)' />
                   <Route exact path='/' component={Home} />
                   <Route exact path='/detail/:detailId' component={Detail} />
                   <Route exact path='/register' component={FormRegister} />
@@ -45,8 +46,8 @@ const App = () => {
               ) : console.log('LOADING!')
             }
           </Switch>
-        </Provider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </Provider>
       {
         activeDarkmode ? <GlobalStyle themes={ThemeDark} /> : <GlobalStyle themes={ThemeNormal} />
       }
